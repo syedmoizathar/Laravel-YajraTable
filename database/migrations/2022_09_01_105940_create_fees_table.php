@@ -2,10 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContactModelsTable extends Migration
+class CreateFeesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +13,11 @@ class CreateContactModelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('contact_models', function (Blueprint $table) {
+        Schema::create('fees', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('user_number');
+            $table->integer('user_id')->unique();
+            $table->string('price');
+            $table->integer('status');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
@@ -30,6 +30,6 @@ class CreateContactModelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contact_models');
+        Schema::dropIfExists('fees');
     }
 }

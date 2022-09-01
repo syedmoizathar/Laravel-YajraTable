@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\ContactModel;
+use App\Models\FeesModel;
 
 class User extends Authenticatable
 {
@@ -45,6 +46,10 @@ class User extends Authenticatable
 
     public function getContact()
     {
-        return $this->belongsTo(ContactModel::class, 'id', 'user_id');
+        return $this->hasOne(ContactModel::class, 'user_id', 'id');
+    }
+    public function getFees()
+    {
+        return $this->hasOne(FeesModel::class, 'user_id', 'id');
     }
 }
